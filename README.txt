@@ -1,7 +1,7 @@
-I used simple python in this project and it is linked with mysql local server
-in backend.
+I used simple python in this project and it is linked with mysql local server in backend.
 
-This project has
+This project have
+
 1.user login
 2.new user register
 3.staff login

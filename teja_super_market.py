@@ -29,7 +29,7 @@ def register():
     cursor.execute(x,(user_name,password,mobile,))
     mydb.commit()
     print("\nsuccessfull registered. pls login..\n")
-    login()
+    return 1
 
 
 def staff():
@@ -71,18 +71,18 @@ def shop():
 
 
 def bill(b):
-
+    newBag=[]
     for i in b:
         x='select item,cost,count from tejastock where itemno=%s;'
         cursor.execute(x,(i[0],))
-        g=cursor.fetchone()
+        g=cursor.fetchall()
 
-        s=int(g[2])
+        s=int(g[0][2])
         p=int(i[1])
         qnt=min(s,p)
-        item=g[0]
-        cost=int(g[1])
-        newBag=[]
+        item=g[0][0]
+        cost=int(g[0][1])
+
         newBag.append([item,cost,qnt])
 
         if s > p :
@@ -90,7 +90,7 @@ def bill(b):
             cursor.execute(x,(s-p,i[0],))
             mydb.commit()
         else :
-            print(f"We have only {qnt} {g[0]}")
+            print(f"We have only {qnt} {g[0][0]}")
             x='update tejastock set count=%s where itemno=%s;'
             cursor.execute(x,(0,i[0],))
             mydb.commit()
@@ -124,12 +124,15 @@ n=int(input("1.login\n2.register(join as new member for amazing discounts..)\n3.
 if n==1:
     login()
 elif n==2:
-    register()
+    k=register()
+    if k==1:
+        login()
 elif n==3:
     pass
 elif n==123:
     staff()
     display()
+    exit()
 
 display()
 get_bill=shop()

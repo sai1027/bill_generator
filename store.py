@@ -1,19 +1,19 @@
 #  display the available stock
 #  user can add items to bag and verifies items
+from res import greet
 
-
-def display(user_name, cursor):
-    print(f'\nHeloo {user_name}..\nWelcome to TEJA SUPERMARKET..\n')
+def display(cursor, user_name):
+    print(f'\n{greet()}{user_name}..\nWelcome to TEJA SUPERMARKET..\n')
     print("\nAvailable items at store : \n")
-    print("-"*40)
+    print("-"*50)
     print('{:<10}{:<10}{:<10}{:<10}'.format('ITEM NO','ITEM','COST','QNT REMAING'))
-    print("-"*40,'\n')
+    print("-"*50,'\n')
 
     cursor.execute('select itemno,item,cost,qnt from stock where qnt>0;')
     data=cursor.fetchall()
     for i in data:
         print('{:<10}{:<10}{:<10}{:<10}'.format(i[0],i[1],i[2],i[3]))
-    print('\n',"-"*40,'\n')
+    print('\n',"-"*50,'\n')
 
 
 

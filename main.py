@@ -26,7 +26,7 @@ n=int(input('''
 
 if n==1:
     user_name=login(cursor)
-
+    member = True
 elif n==2:
     status=register(cursor, mydb)
     if status:
@@ -35,6 +35,8 @@ elif n==2:
         user_name=login(cursor)
 
 elif n==3:
+    user_name='user'
+    member = False
     pass
 
 elif n==123:
@@ -48,7 +50,7 @@ elif n==123:
 
 time.sleep(3)
 clear()
-display(user_name , cursor)
+display(cursor, user_name )
 shopping_bag=shop()
 verifyBag = verifyBag(cursor,mydb, shopping_bag)
-bill(verifyBag)
+bill(verifyBag, member)
